@@ -13,7 +13,7 @@
       <input id="search-input" type="text" v-on:keyup.enter="search" v-model='searchInput'>
       <button id='search-button' @click='search'>Search</button>
 
-      <p v-if='this.searchResults.count'>You can click an image to navigate to selection's preview.</p>
+      <p v-if='this.searchResults.count'>You can click an image to navigate to it's preview.</p>
 
       <ul id='results'>
         <li v-for="(section, i) in searchResults.kinds" :key="i">
@@ -88,7 +88,7 @@
 
     <!-- FAVORITES SCREEN -->
     <div id='favorites-content' v-if="favoritesTab == true">
-      <p v-if='Object.keys(this.favorites).length'>You can click an image to navigate to selection's preview.</p>
+      <p v-if='Object.keys(this.favorites).length'>You can click an image to navigate to it's preview.</p>
 
       <ul>
         <li id='noFavorites' v-if='Object.keys(favoritesByKind).length == 0'>
