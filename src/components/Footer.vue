@@ -8,5 +8,6 @@
   footer {
     position: relative;
     top: 75px;
+    margin-bottom: 15px;
   }
 </style>
