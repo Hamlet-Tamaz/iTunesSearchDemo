@@ -33,7 +33,7 @@
               <li v-for='(item, i) in section' :key="i" class="tile"> 
 
                 <div class='tile-top'>
-                  <a :href="item.trackViewUrl">
+                  <a :href="item.trackViewUrl" target="_blank">
                     <img class='tile-image' :src="item.artworkUrl100" >
                   </a>
 
@@ -113,7 +113,7 @@
               <li v-for='(item, i) in section' :key="i" class="tile"> 
 
                 <div class='tile-top'>
-                  <a :href="item.trackViewUrl">
+                  <a :href="item.trackViewUrl" target="_blank">
                     <img class='tile-image' :src="item.artworkUrl100" >
                   </a>
 
