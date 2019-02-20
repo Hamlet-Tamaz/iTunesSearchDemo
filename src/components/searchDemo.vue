@@ -4,8 +4,11 @@
     
     <!-- TAB NAV -->
     <div id='tab-nav'>
-      <h3 class='tab' :class="{activeTab: searchTab}"    @click="tab('search')">Search</h3>
-      <h3 class='tab' :class="{activeTab: favoritesTab}" @click="tab('favorites')">Favorites</h3>
+      <h3 id='tab-search' class='tab' :class="{activeTab: searchTab}"    @click="tab('search')">Search</h3>
+      <h3 id='tab-favorites' class='tab' :class="{activeTab: favoritesTab}" @click="tab('favorites')">
+        <span>Favorites</span>
+        <span id='clear-favorites' @click='clearFavorites'>Clear</span>
+      </h3>
     </div>
     
     <!-- SEARCH SCREEN -->
@@ -156,11 +159,6 @@
                       <td>{{item.id}}</td>
                     </tr>
                   </table>
-                  <!-- <div v-if='item.artistName'>        Artist: {{item.artistName}} </div>
-                  <div v-if='item.trackName'>         Track:  {{item.trackName}} </div>
-                  <div v-if='item.collectionName'>    Album:  {{item.collectionName}} </div>
-                  <div v-if='item.primaryGenreName'>  Genre:  {{item.primaryGenreName}} </div>
-                  <div v-if='item.id'>                ID:     {{item.id}} </div> -->
                 </div>
 
               </li>
@@ -207,7 +205,7 @@ export default {
     }
   },
   created() {
-    /* this.$http.get('http://localhost:8081/search:bla', (resp) => {
+    /* this.$http.get('http://localhost:8081/search:test', (resp) => {
       let data = '';
 
       // A chunk of data has been recieved.
@@ -249,6 +247,10 @@ export default {
     isFavorite(id) {
       return this.favorites[id];
     },
+    clearFavorites() {
+      this.$set(this, 'favorites', {});
+      localStorage.setItem('demoSearchFavorites', JSON.stringify({}));
+    },
     toggleFavorite(item, opt) {
       if (this.favorites[item.id]) {
         let conf = true;
@@ -272,9 +274,6 @@ export default {
         elem.style.display = 'none';
         event.target.classList.remove('flip');
       }
-
-
-
     },
     capFL: function (str) { return str.charAt(0).toUpperCase() + str.slice(1); },
     cleanKind: function (str) { 
@@ -310,19 +309,39 @@ export default {
   justify-content: center;
   align-items: center;
   border: .5px solid #52A1F7;
+  position: relative;
 }
 
-.tab:nth-child(1) {
+#tab-search {
   border-radius: 10px 0 0 10px;
 }
 
-.tab:nth-child(2) {
+#tab-favorites {
   border-radius: 0 10px 10px 0;
 }
 
 .activeTab {
   background-color: #52A1F7;
   color: white;
+}
+
+#clear-favorites {
+  color: white;
+  position: absolute;
+  right: 0;
+  background-color: #FB5A5B;
+  border-radius: 0 10px 10px 0;
+  height: 102%;
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+}
+
+@media (max-width: 500px) {
+  #tab-favorites {
+    justify-content: left;
+    padding-left: 15px;
+  }
 }
 
 #search-content, #favorites-content {
