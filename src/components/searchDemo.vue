@@ -189,16 +189,21 @@ export default {
   },
   computed: {
     favoritesByKind() {
-      let res = {};
+      let unordered = {};
       const f = this.favorites;
 
       for (var el in f ) {
-        if (!res[f[el].kind]) res[f[el].kind] = [];
+        if (!unordered[f[el].kind]) unordered[f[el].kind] = [];
 
-        res[f[el].kind].push(f[el]);
+        unordered[f[el].kind].push(f[el]);
       };
 
-      return res;
+      const ordered = {};
+      Object.keys(unordered).sort().forEach(function(key) {
+        ordered[key] = unordered[key];
+      });
+
+      return ordered;
     }
   },
   created() {
