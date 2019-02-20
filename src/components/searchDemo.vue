@@ -2,23 +2,34 @@
   <div>
     <h1>iTunes Search Demo</h1>
     
+    <!-- TAB NAV -->
     <div id='tab-nav'>
-      <div class='tab' :class="{activeTab: searchTab}"    @click="tab('search')">Search</div>
-      <div class='tab' :class="{activeTab: favoritesTab}" @click="tab('favorites')">Favorites</div>
+      <h3 class='tab' :class="{activeTab: searchTab}"    @click="tab('search')">Search</h3>
+      <h3 class='tab' :class="{activeTab: favoritesTab}" @click="tab('favorites')">Favorites</h3>
     </div>
     
+    <!-- SEARCH SCREEN -->
     <div v-if="searchTab == true">
-      <input id="search-input" type="text" v-on:keyup.enter="search">
+      <input id="search-input" type="text" v-on:keyup.enter="search" v-model='searchInput'>
       <button id='search-button' @click='search'>Search</button>
 
-      <p v-if='Object.keys(this.searchResults).length'>You can click an image to navigate to selection's preview.</p>
+      <p v-if='this.searchResults.count'>You can click an image to navigate to selection's preview.</p>
 
       <ul id='results'>
         <li v-for="(section, i) in searchResults.kinds" :key="i">
           <div class='kind-box'>
-            <h3>{{ cleanKind(i) }}<span v-if="section.length > 1 && i != 'undefined'">s</span> </h3>
+            <h3>
+              <u>{{ cleanKind(i) }}<span v-if="section.length > 1 && i != 'undefined'">s</span> </u>
+              <br>
+              <!-- <span class='dropdown' @click='toggleDropdown("section-"+i)'>V</span> -->
+              <img 
+                src="../assets/caret-down.jpg"
+                class='dropdown' 
+                @click='toggleDropdown("section-"+i)'
+              >
+            </h3>
             
-            <ul>
+            <ul :id='"section-"+i' class='section'>
               <li v-for='(item, i) in section' :key="i" class="tile"> 
 
                 <div class='tile-top'>
@@ -65,11 +76,6 @@
                       <td>{{item.id}}</td>
                     </tr>
                   </table>
-                  <!-- <div v-if='item.artistName'>        Artist: {{item.artistName}} </div>
-                  <div v-if='item.trackName'>         Track:  {{item.trackName}} </div>
-                  <div v-if='item.collectionName'>    Album:  {{item.collectionName}} </div>
-                  <div v-if='item.primaryGenreName'>  Genre:  {{item.primaryGenreName}} </div>
-                  <div v-if='item.id'>                ID:     {{item.id}} </div> -->
                 </div>
 
               </li>
@@ -80,15 +86,30 @@
       </ul>
     </div>
 
+    <!-- FAVORITES SCREEN -->
     <div v-if="favoritesTab == true">
       <p v-if='Object.keys(this.favorites).length'>You can click an image to navigate to selection's preview.</p>
 
       <ul>
+        <li id='noFavorites' v-if='Object.keys(favoritesByKind).length == 0'>
+          <h2>You have no favorites :( </h2>
+          <h4>Mark the heart icon from the search section to save items for later and to display them here.</h4>
+        </li>
+
         <li v-for="(section, i) in favoritesByKind" :key="i">
           <div class='kind-box'>
-            <h3>{{ cleanKind(i) }}<span v-if="section.length > 1 && section.kind != 'undefined'">s</span> </h3>
+            <h3>
+              <u>{{ cleanKind(i) }}<span v-if="section.length > 1 && section.kind != 'undefined'">s</span></u>
+              <br>
+              <!-- <span class='dropdown' @click='toggleDropdown("section-"+i)'>V</span> -->
+              <img 
+                src="../assets/caret-down.jpg"
+                class='dropdown' 
+                @click='toggleDropdown("section-"+i)'
+              >
+            </h3>
             
-            <ul>
+            <ul :id='"section-"+i' class='section'>
               <li v-for='(item, i) in section' :key="i" class="tile"> 
 
                 <div class='tile-top'>
@@ -162,7 +183,8 @@ export default {
       searchResults: {},
       favorites: JSON.parse(localStorage.demoSearchFavorites),
       searchTab: true,
-      favoritesTab: false
+      favoritesTab: false,
+      searchInput: ''
     }
   },
   computed: {
@@ -208,7 +230,6 @@ export default {
       }
     },
     search() {
-      debugger
       this.$http.post('http://localhost:3002/search', {
         term: document.getElementById('search-input').value
         // term: 'eminem'
@@ -224,10 +245,6 @@ export default {
       return this.favorites[id];
     },
     toggleFavorite(item, opt) {
-      if (!localStorage.demoSearchFavorites) {
-        localStorage.setItem('demoSearchFavorites', JSON.stringify({}) );
-      }
-
       if (this.favorites[item.id]) {
         let conf = true;
         if (opt == 'favorites') conf = confirm('Are you sure you want to remove item from favorites?');
@@ -240,12 +257,26 @@ export default {
 
       localStorage.setItem('demoSearchFavorites', f_string );
     },
+    toggleDropdown(id) {
+      const elem = document.getElementById(id);
+
+      if (elem.style.display != 'flex') {
+        elem.style.display = 'flex';
+        event.target.classList.add('flip');
+      } else {
+        elem.style.display = 'none';
+        event.target.classList.remove('flip');
+      }
+
+
+
+    },
     capFL: function (str) { return str.charAt(0).toUpperCase() + str.slice(1); },
     cleanKind: function (str) { 
       let res = '';
 
       if (str == 'undefined') {
-        res = "Miscellaneous / No Kind Provided"
+        res = "Miscellaneous / No Kind Provided";
       } else {
         res = str.split('-');
         res = res.map( el => {
@@ -282,22 +313,35 @@ export default {
 }
 
 #search-input, #search-button {
-  font-size: x-large;
+  font-size: large;
+  padding: 10px;
 }
 
 ul {
   list-style-type: none;
+  padding: 0;
 }
+
 
 .kind-box {
   border: 1px solid black;
   border-radius: 10px;
-  margin: 0 20px;
+  margin: 20px;
   padding: 10px;
 }
 
-.kind-box > ul {
-  display: flex;
+.dropdown {
+  cursor: pointer;
+  width: 50px;
+  margin-top: 25px;
+}
+
+.flip {
+  transform: rotate(180deg);
+}
+
+.section {
+  display: none;
   flex-wrap: wrap;
   list-style-type: none;
   justify-content: space-evenly;
@@ -328,6 +372,7 @@ ul {
 .tile-top > img {
   cursor: pointer;
 }
+
 .tile-image {
   min-width: 100px;
 }
@@ -342,6 +387,10 @@ ul {
   position: relative;
   top: 25px;
   cursor: pointer;
+}
+
+#noFavorites {
+  margin-top: 75px;
 }
 
 </style>

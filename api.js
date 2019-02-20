@@ -1,8 +1,6 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const axios = require('axios');
-// const http = require('http');
-require('locus');
+const express     = require('express');
+const bodyParser  = require('body-parser');
+const axios       = require('axios');
 
 /* initialize Express and necessary tools */
 const app = express();
@@ -11,10 +9,6 @@ app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
-
-/* change how json stringifies */
-app.set('json replacer', '---'); // property transformation rules
-app.set('json spaces', 4); 
 
 /* Fix CORS */
 app.use(function (req, res, next) {
@@ -29,20 +23,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
 
-app.post('/search', (req, res) => {
-  console.log('in the api: ');
-  
+app.post('/search', (req, res) => {  
   let term = encodeURI('term=' + req.body.term);
   
   axios.get('https://itunes.apple.com/search?' + term)
   .then(function (response) {
     // handle success
-    // console.log("search: ", response.data);
-    
     let data = {
       count: response.data.resultCount,
       kinds: {}
@@ -70,9 +57,7 @@ app.post('/search', (req, res) => {
 
       data.kinds[obj.kind].push(obj);
     });
-    
-    // let data_s = JSON.stringify(data);
-    // eval(locus);
+
     res.send(data);
   })
   .catch(function (error) {

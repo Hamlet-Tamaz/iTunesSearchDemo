@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <img id="logo" alt="iTunes logo" src="./assets/iTunes-logo.jpg">
-
     <SearchDemo />
   </div>
 </template>
