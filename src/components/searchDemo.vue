@@ -238,8 +238,12 @@ export default {
       return this.favorites[id];
     },
     clearFavorites() {
-      this.$set(this, 'favorites', {});
-      localStorage.setItem('demoSearchFavorites', JSON.stringify({}));
+      let conf = confirm("Are you sure you want to remove all your favorites?");
+      if (conf == true) {
+        this.$set(this, 'favorites', {});
+        localStorage.setItem('demoSearchFavorites', JSON.stringify({}));
+      }
+      event.stopImmediatePropagation();
     },
     toggleFavorite(item, opt) {
       if (this.favorites[item.id]) {
