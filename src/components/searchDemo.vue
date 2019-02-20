@@ -196,7 +196,7 @@ export default {
         if (!unordered[f[el].kind]) unordered[f[el].kind] = [];
 
         unordered[f[el].kind].push(f[el]);
-      };
+      }
 
       const ordered = {};
       Object.keys(unordered).sort().forEach(function(key) {
@@ -237,12 +237,12 @@ export default {
     search() {
       this.$http.post('http://localhost:3002/search', {
         term: document.getElementById('search-input').value
-        // term: 'eminem'
         })
         .then((res)=> {
           this.$set(this, 'searchResults', res.data);
         })
         .catch((err)=> {
+          console.log('err: ', err); // this would be removed in a production app
           alert('The search failed. Please try again.');
         });
     },

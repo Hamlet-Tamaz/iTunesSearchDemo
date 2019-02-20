@@ -21,7 +21,7 @@
     "eslint": "5.8.0",
     "eslint-plugin-vue": "5.0.0",
     "locus": "2.0.1",
-    "vue-template-compiler": "2.5.21"
+    "vue-template-compiler": "2.6.6"
   },
   "eslintConfig": {
     "root": true,
