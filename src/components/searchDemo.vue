@@ -312,6 +312,14 @@ export default {
   border: .5px solid #52A1F7;
 }
 
+.tab:nth-child(1) {
+  border-radius: 10px 0 0 10px;
+}
+
+.tab:nth-child(2) {
+  border-radius: 0 10px 10px 0;
+}
+
 .activeTab {
   background-color: #52A1F7;
   color: white;
@@ -326,7 +334,6 @@ ul {
   list-style-type: none;
   padding: 0;
 }
-
 
 .kind-box {
   border: 1px solid black;

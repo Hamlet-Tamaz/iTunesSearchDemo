@@ -37,20 +37,20 @@ app.post('/search', (req, res) => {
     
     response.data.results.forEach((el, i)=> {
       let obj = {
-        id: el.trackId,
-        kind: el.kind,
-        artistName: el.artistName,
-        trackName: el.trackName,
-        collectionName: el.collectionName,
-        artistViewUrl: el.artistViewUrl,
-        primaryGenreName: el.primaryGenreName,
-        contentAdvisoryRating: el.contentAdvisoryRating,
-        trackExplicitness: el.trackExplicitness,
-        trackTimeMillis: el.trackTimeMillis,
-        releaseDate: el.releaseDate,
-        trackViewUrl: el.trackViewUrl,
-        previewUrl: el.previewUrl,
-        artworkUrl100: el.artworkUrl100
+        id                     : el.trackId,
+        kind                   : el.kind,
+        artistName             : el.artistName,
+        trackName              : el.trackName,
+        collectionName         : el.collectionName,
+        artistViewUrl          : el.artistViewUrl,
+        primaryGenreName       : el.primaryGenreName,
+        contentAdvisoryRating  : el.contentAdvisoryRating,
+        trackExplicitness      : el.trackExplicitness,
+        trackTimeMillis        : el.trackTimeMillis,
+        releaseDate            : el.releaseDate,
+        trackViewUrl           : el.trackViewUrl,
+        previewUrl             : el.previewUrl,
+        artworkUrl100          : el.artworkUrl100
       };
       
       if (!data.kinds[obj.kind]) data.kinds[obj.kind] = [];
