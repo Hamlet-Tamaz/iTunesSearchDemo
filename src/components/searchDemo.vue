@@ -9,7 +9,7 @@
     </div>
     
     <!-- SEARCH SCREEN -->
-    <div v-if="searchTab == true">
+    <div id='search-content' v-if="searchTab == true">
       <input id="search-input" type="text" v-on:keyup.enter="search" v-model='searchInput'>
       <button id='search-button' @click='search'>Search</button>
 
@@ -87,7 +87,7 @@
     </div>
 
     <!-- FAVORITES SCREEN -->
-    <div v-if="favoritesTab == true">
+    <div id='favorites-content' v-if="favoritesTab == true">
       <p v-if='Object.keys(this.favorites).length'>You can click an image to navigate to selection's preview.</p>
 
       <ul>
@@ -299,7 +299,7 @@ export default {
 <style>
 #tab-nav {
   display: flex;
-  margin: 10px 0 20px;
+  margin: 10px 15px 20px;
 }
 
 .tab {
@@ -325,6 +325,10 @@ export default {
   color: white;
 }
 
+#search-content {
+  margin: 15px 0;
+}
+
 #search-input, #search-button {
   font-size: large;
   padding: 10px;
@@ -338,7 +342,7 @@ ul {
 .kind-box {
   border: 1px solid black;
   border-radius: 10px;
-  margin: 20px;
+  margin: 20px 0;
   padding: 10px;
 }
 
