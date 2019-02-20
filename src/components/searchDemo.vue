@@ -325,8 +325,8 @@ export default {
   color: white;
 }
 
-#search-content {
-  margin: 15px 0;
+#search-content, #favorites-content {
+  margin: 0 15px;
 }
 
 #search-input, #search-button {

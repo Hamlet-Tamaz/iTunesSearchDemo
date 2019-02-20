@@ -2,16 +2,19 @@
   <div id="app">
     <img id="logo" alt="iTunes logo" src="./assets/iTunes-logo.jpg">
     <SearchDemo />
+    <Footer />
   </div>
 </template>
 
 <script>
-import SearchDemo from './components/searchDemo.vue'
+import SearchDemo from './components/SearchDemo.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'app',
   components: {
-    SearchDemo
+    SearchDemo,
+    Footer
   }
 }
 </script>
@@ -23,7 +26,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin: 60px auto 0;
+  margin: 75px auto;
   max-width: 1000px;
 }
 
