@@ -21,15 +21,10 @@
       <ul id='results'>
         <li v-for="(section, i) in searchResults.kinds" :key="i">
           <div class='kind-box'>
-            <h3>
+            <h3 class='dropdown' @click='toggleDropdown("section-"+i)'>
               <u>{{ cleanKind(i) }}<span v-if="section.length > 1 && i != 'undefined'">s</span> </u>
               <br>
-              <!-- <span class='dropdown' @click='toggleDropdown("section-"+i)'>V</span> -->
-              <img 
-                src="../assets/caret-down.jpg"
-                class='dropdown' 
-                @click='toggleDropdown("section-"+i)'
-              >
+              <img class='arrow' src="../assets/caret-down.jpg">
             </h3>
             
             <ul :id='"section-"+i' class='section'>
@@ -101,15 +96,10 @@
 
         <li v-for="(section, i) in favoritesByKind" :key="i">
           <div class='kind-box'>
-            <h3>
+            <h3 class='dropdown' @click='toggleDropdown("section-"+i)'>
               <u>{{ cleanKind(i) }}<span v-if="section.length > 1 && section.kind != 'undefined'">s</span></u>
               <br>
-              <!-- <span class='dropdown' @click='toggleDropdown("section-"+i)'>V</span> -->
-              <img 
-                src="../assets/caret-down.jpg"
-                class='dropdown' 
-                @click='toggleDropdown("section-"+i)'
-              >
+              <img class='arrow' src="../assets/caret-down.jpg">
             </h3>
             
             <ul :id='"section-"+i' class='section'>
@@ -269,10 +259,13 @@ export default {
 
       if (elem.style.display != 'flex') {
         elem.style.display = 'flex';
-        event.target.classList.add('flip');
+        let arrow = event.target.parentElement.children[2];
+        arrow.classList.add('flip');
       } else {
         elem.style.display = 'none';
-        event.target.classList.remove('flip');
+        
+        let arrow = event.target.parentElement.children[2];
+        arrow.classList.remove('flip');
       }
     },
     capFL: function (str) { return str.charAt(0).toUpperCase() + str.slice(1); },
@@ -367,6 +360,9 @@ ul {
 
 .dropdown {
   cursor: pointer;
+}
+
+.arrow {
   width: 50px;
   margin-top: 25px;
 }
