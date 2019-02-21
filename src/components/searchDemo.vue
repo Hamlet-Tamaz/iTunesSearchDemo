@@ -39,11 +39,11 @@
       <ul id='results'>
         <li v-for="(section, i) in searchResults.kinds" :key="i">
           <div class='kind-box'>
-            <h3 >
+            <h2>
               <u class='pointer' @click='toggleDropdown("section-"+i)'>{{ cleanKind(i) }}<span v-if="section.length > 1 && i != 'undefined'">s</span> </u>
               <br>
               <img class='arrow' src="../assets/caret-down.jpg" @click='toggleDropdown("section-"+i)'>
-            </h3>
+            </h2>
             
             <ul :id='"section-"+i' class='section'>
               <li 
@@ -124,11 +124,11 @@
 
         <li v-for="(section, i) in favoritesByKind" :key="i">
           <div class='kind-box'>
-            <h3 class='dropdown' >
-              <u @click='toggleDropdown("section-"+i)'>{{ cleanKind(i) }}<span v-if="section.length > 1 && section.kind != 'undefined'">s</span></u>
+            <h2>
+              <u class="pointer" @click='toggleDropdown("section-"+i)'>{{ cleanKind(i) }}<span v-if="section.length > 1 && section.kind != 'undefined'">s</span></u>
               <br>
               <img class='arrow' src="../assets/caret-down.jpg" @click='toggleDropdown("section-"+i)'>
-            </h3>
+            </h2>
             
             <ul :id='"section-"+i' class='section'>
               <li 

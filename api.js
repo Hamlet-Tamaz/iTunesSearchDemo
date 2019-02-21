@@ -27,9 +27,9 @@ app.use(function (req, res, next) {
 
 app.post('/search', (req, res) => {
   let term = req.body.term.split(' ').join('+');
-  eval(locus)
+  
   let query = encodeURI('term=' + term + '&limit=' + req.body.quantity);
-  eval(locus)
+  
   axios.get('https://itunes.apple.com/search?' + query)
   .then(function (response) {
     // handle success
