@@ -19,6 +19,7 @@
         name='search-quantity' 
         type="number" 
         min=10 max=100 value=50
+        v-on:keyup.enter="search"
       >
       <input 
         id="search-input" 
@@ -30,6 +31,10 @@
       <button id='search-button' @click='search'>Search</button>
 
       <p v-if='this.searchResults.count'>You can click an image to navigate to it's preview.</p>
+      <p>
+        <span class='explicit-sign'>Explicit</span> : 
+        <span class='nonexplicit-sign'>Non-Explicit</span>
+      </p>
 
       <ul id='results'>
         <li v-for="(section, i) in searchResults.kinds" :key="i">
@@ -41,7 +46,13 @@
             </h3>
             
             <ul :id='"section-"+i' class='section'>
-              <li v-for='(item, i) in section' :key="i" class="tile"> 
+              <li 
+              v-for='(item, i) in section' 
+              :key="i" 
+              class="tile" 
+              :class='{"border-danger": (item.trackExplicitness == "explicit") }'
+              > 
+               <!-- item.trackExplicitness == 'explicit' -->
 
                 <div class='tile-top'>
                   <a :href="item.trackViewUrl" target="_blank">
@@ -100,6 +111,10 @@
     <!-- FAVORITES SCREEN -->
     <div id='favorites-content' v-if="favoritesTab == true">
       <p v-if='Object.keys(this.favorites).length'>You can click an image to navigate to it's preview.</p>
+      <p>
+        <span class='explicit-sign'>Explicit</span> : 
+        <span class='nonexplicit-sign'>Non-Explicit</span>
+      </p>
 
       <ul>
         <li id='noFavorites' v-if='Object.keys(favoritesByKind).length == 0'>
@@ -116,7 +131,12 @@
             </h3>
             
             <ul :id='"section-"+i' class='section'>
-              <li v-for='(item, i) in section' :key="i" class="tile"> 
+              <li 
+                v-for='(item, i) in section' 
+                :key="i" 
+                class="tile" 
+                :class='{"border-danger": (item.trackExplicitness == "explicit")}'
+              > 
 
                 <div class='tile-top'>
                   <a :href="item.trackViewUrl" target="_blank">
@@ -371,8 +391,18 @@ export default {
   top: 18px;
 }
 
-#search-input {
-  /* margin: 0 10px; */
+.explicit-sign {
+  border: 1px solid black;
+  border-top: 5px solid  #FB5A5B;
+  border-radius: 10px;
+  padding: 0 5px 5px;
+
+}
+.nonexplicit-sign {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+
 }
 
 ul {
@@ -451,6 +481,12 @@ ul {
 
 #noFavorites {
   margin-top: 75px;
+}
+
+
+/* UTILITIES */
+.border-danger {
+  border-top: 15px solid  #FB5A5B;
 }
 
 </style>
