@@ -13,7 +13,20 @@
     
     <!-- SEARCH SCREEN -->
     <div id='search-content' v-if="searchTab == true">
-      <input id="search-input" type="text" v-on:keyup.enter="search" v-model='searchInput'>
+      <img id='search-quantity-img' src="../assets/list.jpg" alt="">
+      <input 
+        id='search-quantity' 
+        name='search-quantity' 
+        type="number" 
+        min=10 max=100 value=50
+      >
+      <input 
+        id="search-input" 
+        type="text" 
+        v-on:keyup.enter="search" 
+        v-model='searchInput'
+        placeholder="Enter word or phrase"
+      >
       <button id='search-button' @click='search'>Search</button>
 
       <p v-if='this.searchResults.count'>You can click an image to navigate to it's preview.</p>
@@ -224,7 +237,8 @@ export default {
     },
     search() {
       this.$http.post('http://localhost:3002/search', {
-        term: document.getElementById('search-input').value
+        term: document.getElementById('search-input').value,
+        quantity: document.getElementById('search-quantity').value,
         })
         .then((res)=> {
           this.$set(this, 'searchResults', res.data);
@@ -345,9 +359,20 @@ export default {
   margin: 0 15px;
 }
 
-#search-input, #search-button {
+#search-input, #search-button, #search-quantity {
   font-size: large;
   padding: 10px;
+  margin-left: 10px;
+}
+
+#search-quantity-img {
+  width: 50px;
+  position: relative;
+  top: 18px;
+}
+
+#search-input {
+  /* margin: 0 10px; */
 }
 
 ul {
