@@ -366,13 +366,6 @@ export default {
   padding: 0 10px;
 }
 
-@media (max-width: 500px) {
-  #tab-favorites {
-    justify-content: left;
-    padding-left: 15px;
-  }
-}
-
 #search-content, #favorites-content {
   margin: 0 15px;
 }
@@ -481,6 +474,18 @@ ul {
   margin-top: 75px;
 }
 
+@media (max-width: 500px) {
+  #tab-favorites {
+    justify-content: left;
+    padding-left: 15px;
+  }
+
+  #search-button {
+    width: 353px;
+    margin-left: 0;
+  }
+
+}
 
 /* UTILITIES */
 .border-danger {
