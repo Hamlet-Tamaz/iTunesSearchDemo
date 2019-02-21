@@ -393,14 +393,13 @@ export default {
   border: 1px solid black;
   border-top: 5px solid  #FB5A5B;
   border-radius: 10px;
-  padding: 0 5px 5px;
+  padding: 3px 5px 5px;
 
 }
 .nonexplicit-sign {
   border: 1px solid black;
   border-radius: 10px;
-  padding: 5px;
-
+  padding: 7px 5px 5px;
 }
 
 ul {
