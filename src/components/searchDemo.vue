@@ -31,7 +31,7 @@
       <button id='search-button' @click='search'>Search</button>
 
       <p v-if='this.searchResults.count'>You can click an image to navigate to it's preview.</p>
-      <p>
+      <p class='explicitness'>
         <span class='explicit-sign'>Explicit</span> : 
         <span class='nonexplicit-sign'>Non-Explicit</span>
       </p>
@@ -111,7 +111,7 @@
     <!-- FAVORITES SCREEN -->
     <div id='favorites-content' v-if="favoritesTab == true">
       <p v-if='Object.keys(this.favorites).length'>You can click an image to navigate to it's preview.</p>
-      <p>
+      <p class='explicitness'>
         <span class='explicit-sign'>Explicit</span> : 
         <span class='nonexplicit-sign'>Non-Explicit</span>
       </p>
@@ -327,7 +327,7 @@ export default {
 <style>
 #tab-nav {
   display: flex;
-  margin: 10px 15px 20px;
+  margin: 10px 15px;
 }
 
 .tab {
@@ -380,6 +380,11 @@ export default {
   width: 50px;
   position: relative;
   top: 18px;
+}
+
+.explicitness {
+  padding-left: 25px;
+  margin-bottom: 30px;
 }
 
 .explicit-sign {
@@ -484,6 +489,7 @@ ul {
   #search-button {
     width: 353px;
     margin-left: 0;
+    margin-top: 10px;
   }
 
 }
