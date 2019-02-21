@@ -39,10 +39,10 @@
       <ul id='results'>
         <li v-for="(section, i) in searchResults.kinds" :key="i">
           <div class='kind-box'>
-            <h3 class='dropdown' @click='toggleDropdown("section-"+i)'>
-              <u>{{ cleanKind(i) }}<span v-if="section.length > 1 && i != 'undefined'">s</span> </u>
+            <h3 >
+              <u class='pointer' @click='toggleDropdown("section-"+i)'>{{ cleanKind(i) }}<span v-if="section.length > 1 && i != 'undefined'">s</span> </u>
               <br>
-              <img class='arrow' src="../assets/caret-down.jpg">
+              <img class='arrow' src="../assets/caret-down.jpg" @click='toggleDropdown("section-"+i)'>
             </h3>
             
             <ul :id='"section-"+i' class='section'>
@@ -124,10 +124,10 @@
 
         <li v-for="(section, i) in favoritesByKind" :key="i">
           <div class='kind-box'>
-            <h3 class='dropdown' @click='toggleDropdown("section-"+i)'>
-              <u>{{ cleanKind(i) }}<span v-if="section.length > 1 && section.kind != 'undefined'">s</span></u>
+            <h3 class='dropdown' >
+              <u @click='toggleDropdown("section-"+i)'>{{ cleanKind(i) }}<span v-if="section.length > 1 && section.kind != 'undefined'">s</span></u>
               <br>
-              <img class='arrow' src="../assets/caret-down.jpg">
+              <img class='arrow' src="../assets/caret-down.jpg" @click='toggleDropdown("section-"+i)'>
             </h3>
             
             <ul :id='"section-"+i' class='section'>
@@ -294,15 +294,13 @@ export default {
     },
     toggleDropdown(id) {
       const elem = document.getElementById(id);
+      let arrow = event.target.parentElement.children[2];
 
       if (elem.style.display != 'flex') {
         elem.style.display = 'flex';
-        let arrow = event.target.parentElement.children[2];
         arrow.classList.add('flip');
       } else {
         elem.style.display = 'none';
-        
-        let arrow = event.target.parentElement.children[2];
         arrow.classList.remove('flip');
       }
     },
@@ -424,6 +422,7 @@ ul {
 .arrow {
   width: 50px;
   margin-top: 25px;
+  cursor: pointer;
 }
 
 .flip {
@@ -487,6 +486,9 @@ ul {
 /* UTILITIES */
 .border-danger {
   border-top: 15px solid  #FB5A5B;
+}
+.pointer {
+  cursor: pointer;
 }
 
 </style>
