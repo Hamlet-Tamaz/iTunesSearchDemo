@@ -50,7 +50,7 @@
               v-for='(item, i) in section' 
               :key="i" 
               class="tile" 
-              :class='{"border-danger": (item.trackExplicitness == "explicit") }'
+              :class='{"border-explicit": (item.trackExplicitness == "explicit") }'
               > 
                <!-- item.trackExplicitness == 'explicit' -->
 
@@ -135,7 +135,7 @@
                 v-for='(item, i) in section' 
                 :key="i" 
                 class="tile" 
-                :class='{"border-danger": (item.trackExplicitness == "explicit")}'
+                :class='{"border-explicit": (item.trackExplicitness == "explicit")}'
               > 
 
                 <div class='tile-top'>
@@ -434,7 +434,7 @@ ul {
   border: .5px solid grey;
   border-radius: 10px;
   margin: 10px 20px;
-  padding: 10px;
+  padding: 14.5px 10px 10px;
   width: 250px;
 }
 
@@ -448,6 +448,7 @@ ul {
   justify-content: space-around;
   border-bottom: 1px solid black;
   padding: 10px 0 20px;
+  min-height: 100px;
 }
 
 .tile-top > img {
@@ -488,8 +489,9 @@ ul {
 }
 
 /* UTILITIES */
-.border-danger {
+.border-explicit {
   border-top: 15px solid  #FB5A5B;
+  padding-top: 0;
 }
 .pointer {
   cursor: pointer;

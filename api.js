@@ -1,7 +1,7 @@
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const axios       = require('axios');
-require(locus)
+require('locus');
 
 /* initialize Express and necessary tools */
 const app = express();
@@ -25,10 +25,12 @@ app.use(function (req, res, next) {
 });
 
 
-app.post('/search', (req, res) => {  
-  let term = encodeURI('term=' + req.body.term + '&limit=' + req.body.quantity);
+app.post('/search', (req, res) => {
+  let term = req.body.term.split(' ').join('+');
   eval(locus)
-  axios.get('https://itunes.apple.com/search?' + term)
+  let query = encodeURI('term=' + term + '&limit=' + req.body.quantity);
+  eval(locus)
+  axios.get('https://itunes.apple.com/search?' + query)
   .then(function (response) {
     // handle success
     let data = {

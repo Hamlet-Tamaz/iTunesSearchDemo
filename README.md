@@ -7,7 +7,7 @@ STEP 1: npm install
 
 ### Run API
 ```
-STEP 2: run node api.js 
+STEP 2: node api.js 
 ```
 
 ### Compiles and hot-reloads for development
