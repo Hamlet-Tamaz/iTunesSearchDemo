@@ -1,5 +1,10 @@
 # itunes-search-demo
 
+## Important Notes
+- Please keep in mind that the api used for querying itunes songs is no longer maintained/accurate. The returned url that once redirected to individual songs no longer works. Instead of directing to the full page of the song, clicking on the images will now direct you to a preview of your selected item. 
+
+Everything else works as expected. 
+
 ## Project setup
 ```
 STEP 1: npm install

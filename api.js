@@ -1,7 +1,6 @@
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const axios       = require('axios');
-require('locus');
 
 /* initialize Express and necessary tools */
 const app = express();
@@ -24,7 +23,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-
 app.post('/search', (req, res) => {
   let term = req.body.term.split(' ').join('+');
   
@@ -38,7 +36,7 @@ app.post('/search', (req, res) => {
       kinds: {}
     };
     
-    response.data.results.forEach((el, i)=> {
+    response.data.results.forEach(el=> {
       let obj = {
         id                     : el.trackId,
         kind                   : el.kind,
@@ -70,6 +68,6 @@ app.post('/search', (req, res) => {
 });
 
 const port = 3002;
-const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+const server = app.listen(port, () => console.log(`SearchDemo app listening on port ${port}!`));
 
 module.exports = server;

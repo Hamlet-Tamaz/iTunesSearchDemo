@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import SearchDemo from './components/SearchDemo.vue'
-import Footer from './components/Footer.vue'
+import SearchDemo from './components/SearchDemo'
+import Footer from './components/Footer'
 
 export default {
   name: 'app',

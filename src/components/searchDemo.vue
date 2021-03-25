@@ -52,10 +52,8 @@
               class="tile" 
               :class='{"border-explicit": (item.trackExplicitness == "explicit") }'
               > 
-               <!-- item.trackExplicitness == 'explicit' -->
-
                 <div class='tile-top'>
-                  <a :href="item.trackViewUrl" target="_blank">
+                  <a :href="item.previewUrl" target="_blank">
                     <img class='tile-image' :src="item.artworkUrl100" >
                   </a>
 
@@ -228,22 +226,24 @@ export default {
     }
   },
   created() {
-    /* this.$http.get('http://localhost:8081/search:test', (resp) => {
-      let data = '';
+    // this.$http.get('http://localhost:8080/search:test', (resp) => {
+    //   let data = '';
 
-      // A chunk of data has been recieved.
-      resp.on('data', (chunk) => {
-        data += chunk;
-      });
+    //   // A chunk of data has been recieved.
+    //   resp.on('data', (chunk) => {
+    //     data += chunk;
+    //   });
 
-      // The whole response has been received. Print out the result.
-      resp.on('end', () => {
-        console.log(JSON.parse(data).explanation);
-      });
+    //   // The whole response has been received. Print out the result.
+    //   resp.on('end', () => {
+    //     /* eslint-disable-next-line */
+    //     console.log(JSON.parse(data).explanation);
+    //   });
 
-    }).on("error", (err) => {
-      console.log("Error: " + err.message);
-    }); */
+    // }).on("error", (err) => {
+    //   /* eslint-disable-next-line */
+    //   console.log("Error: " + err.message);
+    // });
   },
   methods: {
     tab(tab) {
@@ -264,6 +264,7 @@ export default {
           this.$set(this, 'searchResults', res.data);
         })
         .catch((err)=> {
+          /* eslint-disable-next-line */
           console.log('err: ', err); // this would be removed in a production app
           alert('The search failed. Please try again.');
         });
